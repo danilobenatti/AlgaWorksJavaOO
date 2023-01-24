@@ -15,56 +15,57 @@ import calculate.Salary;
 public class Principal {
 	
 	public static void main(String[] args) {
-		NumberFormat currency = NumberFormat.getCurrencyInstance();
 		Logger logger = Logger.getLogger("");
 		
 		Person owner1 = new Person();
-		owner1.name = "John Wayne";
-		owner1.cpf = "123.456.789-0";
-		owner1.age = 40;
-		owner1.address = "Main Street Way, W34";
-		owner1.sex = 'M';
-		owner1.weight = 92.8f;
-		owner1.height = 1.78f;
-		owner1.birthDate = Date.from(Instant.parse("1952-07-25T03:00:00.00Z"));
-		owner1.followers = 2000;
-		logger.log(Level.INFO, String.format("%s IMC{0}", owner1.name),
-				Imc.calcImc(owner1.weight, owner1.height, owner1.sex));
+		owner1.setName("John Wayne");
+		owner1.setCpf("123.456.789-0");
+		owner1.setAge(40);
+		owner1.setAddress("Main Street Way, W34");
+		owner1.setSex('M');
+		owner1.setWeight(92.8f);
+		owner1.setHeight(1.78f);
+		Instant date1 = Instant.parse("1952-07-25T03:00:00.00Z");
+		owner1.setBirthDate(Date.from(date1));
+		owner1.setFollowers(2000);
+		logger.log(Level.INFO, String.format("%s IMC{0}", owner1.getName()), Imc
+				.imc(owner1.getWeight(), owner1.getHeight(), owner1.getSex()));
 		
 		Vehicle beetle = new Vehicle();
-		beetle.type = "car";
-		beetle.manufactor = "VW";
-		beetle.model = "1600S";
-		beetle.color = "Blue";
-		beetle.yearManufacture = 1974;
-		beetle.price = 7530.75f;
-		beetle.velocity = 60;
-		beetle.active = true;
-		beetle.owner = owner1;
+		beetle.setType("car");
+		beetle.setManufactor("VW");
+		beetle.setModel("1600S");
+		beetle.setColor("Blue");
+		beetle.setYearManufacture(1974);
+		beetle.setPrice(7530.75f);
+		beetle.setVelocity(60);
+		beetle.setActive(true);
+		beetle.setOwner(owner1);
 		
 		Person owner2 = new Person();
-		owner2.name = "Axel Rose";
-		owner2.cpf = "098.765.432-1";
-		owner2.age = 25;
-		owner2.address = "Jorge Whashington, S87";
-		owner2.sex = 'f';
-		owner2.weight = 58.7f;
-		owner2.height = 1.54f;
-		owner2.birthDate = Date.from(Instant.parse("1987-09-05T03:00:00.00Z"));
-		owner2.followers = 5000;
-		logger.log(Level.INFO, String.format("%s IMC{0}", owner2.name),
-				Imc.calcImc(owner2.weight, owner2.height, owner2.sex));
+		owner2.setName("Axel Rose");
+		owner2.setCpf("098.765.432-1");
+		owner2.setAge(25);
+		owner2.setAddress("Jorge Whashington, S87");
+		owner2.setSex('f');
+		owner2.setWeight(58.7f);
+		owner2.setHeight(1.54f);
+		Instant date2 = Instant.parse("1987-09-05T03:00:00.00Z");
+		owner2.setBirthDate(Date.from(date2));
+		owner2.setFollowers(5000);
+		logger.log(Level.INFO, String.format("%s IMC{0}", owner2.getName()), Imc
+				.imc(owner2.getWeight(), owner2.getHeight(), owner2.getSex()));
 		
 		Vehicle pickup = new Vehicle();
-		pickup.type = "utility";
-		pickup.manufactor = "Ford";
-		pickup.model = "Ranger XL";
-		pickup.color = "Black";
-		pickup.yearManufacture = 1994;
-		pickup.price = 30000.78f;
-		pickup.velocity = 100;
-		pickup.active = true;
-		pickup.owner = owner2;
+		pickup.setType("utility");
+		pickup.setManufactor("Ford");
+		pickup.setModel("Ranger XL");
+		pickup.setColor("Black");
+		pickup.setYearManufacture(1994);
+		pickup.setPrice(30000.78f);
+		pickup.setVelocity(100);
+		pickup.setActive(true);
+		pickup.setOwner(owner2);
 		
 		List<Vehicle> vehicles = new ArrayList<>();
 		vehicles.add(beetle);
@@ -84,6 +85,8 @@ public class Principal {
 		}
 		
 		double[] values = { 1500, 1600, 2000, 2000.1, 500.75, 1100.5, 500.76 };
+		
+		NumberFormat currency = NumberFormat.getCurrencyInstance();
 		logger.log(Level.INFO, "MAX: {0}",
 				currency.format(Salary.max(values).orElse(0.0)));
 		logger.log(Level.INFO, "MIN: {0}",
@@ -93,10 +96,15 @@ public class Principal {
 				currency.format(Salary.avg(values).getAsDouble()));
 		
 		/**
-		 * owner1.followers = 2000 / owner2.followers = 5000
+		 * owner1.getFollowers() = 2000 / owner2.getFollowers() = 5000
 		 */
 		logger.log(Level.INFO, "Test followers: {0}",
-				owner1.followers.compareTo(owner2.followers));
+				owner1.getFollowers().compareTo(owner2.getFollowers())); // -1
+		/**
+		 * owner2.getFollowers() = 5000 / owner1.getFollowers() = 2000
+		 */
+		logger.log(Level.INFO, "Test followers: {0}",
+				owner2.getFollowers().compareTo(owner1.getFollowers())); // 1
 		
 		Integer i1 = 127;
 		Integer i2 = 127;
@@ -108,28 +116,34 @@ public class Principal {
 		logger.log(Level.INFO, "Test3: {0}", i3 == i4);
 		logger.log(Level.INFO, "Test4: {0}", Objects.equals(i3, i4));
 		
-		switch (i3.compareTo(i4)) {
-			case -1:
-				logger.log(Level.INFO, "Test5: i3 is lessthan the argument i4");
-				break;
-			case 0:
-				logger.log(Level.INFO, "Test5: i3 is equal to the argument i4");
-				break;
-			case 1:
-				logger.log(Level.INFO, "Test5: i3 greater than argument i4");
-				break;
-			default:
-				break;
-		}
+		String info = switch (i3.compareTo(i4)) {
+			case -1 -> "Test5: i3 is lessthan the argument i4";
+			case 0 -> "Test5: i3 is equal to the argument i4";
+			case 1 -> "Test5: i3 greater than argument i4";
+			default -> null;
+		};
+		logger.info(info);
 		
 		Vehicle scooter = new Vehicle();
-		scooter.type = "Scooter";
-		scooter.model = "Vespa";
-		scooter.manufactor = "Piaggio & C.";
+		scooter.setType("Scooter");
+		scooter.setModel("Vespa");
+		scooter.setManufactor("Piaggio & C.");
 		logger.log(Level.INFO, scooter::toString);
+		
 		scooter.changeManufactor("Honda");
 		scooter.changeModel("Honda PCX");
-		logger.log(Level.INFO, scooter::toString);
+		logger.info(scooter::toString);
+		
+		Supplier supermarket = new Supplier();
+		supermarket.setName("Candy Crush Inc.");
+		supermarket.setAddress("400 Park Pl");
+		
+		Accounts accounts = new Accounts();
+		accounts.setDescription("Crispy Toast 7.1oz");
+		accounts.setValue(1.58);
+		accounts.setExpirationDate(Date.from(Instant.now()));
+		accounts.setSupplier(supermarket);
+		logger.info(accounts::payAccount);
 		
 	}
 	

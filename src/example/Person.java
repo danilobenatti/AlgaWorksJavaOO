@@ -4,15 +4,15 @@ import java.util.Date;
 
 public class Person {
 	
-	String name = null;
-	String cpf = "000.000.000-00";
-	int age = 18;
-	String address = null;
-	char sex = 'M';
-	float weight = 0;
-	float height = 0;
-	Date birthDate = null;
-	Integer followers = null;
+	private String name = null;
+	private String cpf = "000.000.000-00";
+	private int age = 18;
+	private String address = null;
+	private char sex = 'M';
+	private float weight = 0;
+	private float height = 0;
+	private Date birthDate = null;
+	private Integer followers = null;
 	
 	public Person() {
 		super();
@@ -20,7 +20,6 @@ public class Person {
 	
 	public Person(String name, String cpf, int age, String address, char sex,
 			float weight, float height, Date birthDate, Integer followers) {
-		super();
 		this.name = name;
 		this.cpf = cpf;
 		this.age = age;
@@ -32,12 +31,101 @@ public class Person {
 		this.followers = followers;
 	}
 	
+	public String getName() {
+		return name;
+	}
+	
+	public void setName(String name) {
+		this.name = name;
+	}
+	
+	public String getCpf() {
+		return cpf;
+	}
+	
+	public void setCpf(String cpf) {
+		this.cpf = cpf;
+	}
+	
+	public int getAge() {
+		return age;
+	}
+	
+	public void setAge(int age) {
+		this.age = age;
+	}
+	
+	public String getAddress() {
+		return address;
+	}
+	
+	public void setAddress(String address) {
+		this.address = address;
+	}
+	
+	public char getSex() {
+		return sex;
+	}
+	
+	public void setSex(char sex) {
+		this.sex = sex;
+	}
+	
+	public float getWeight() {
+		return weight;
+	}
+	
+	public void setWeight(float weight) {
+		this.weight = weight;
+	}
+	
+	public float getHeight() {
+		return height;
+	}
+	
+	public void setHeight(float height) {
+		this.height = height;
+	}
+	
+	public Date getBirthDate() {
+		return birthDate;
+	}
+	
+	public void setBirthDate(Date birthDate) {
+		this.birthDate = birthDate;
+	}
+	
+	public Integer getFollowers() {
+		return followers;
+	}
+	
+	public void setFollowers(Integer followers) {
+		this.followers = followers;
+	}
+	
 	@Override
 	public String toString() {
-		return String.format(
-				"Person [name=%s, cpf=%s, age=%s, address=%s, sexo=%s, weight=%s, height=%s, birthDate=%s, followers=%s]",
-				name, cpf, age, address, sex, weight, height, birthDate,
-				followers);
+		StringBuilder builder = new StringBuilder();
+		builder.append("Person [name=");
+		builder.append(name);
+		builder.append(", cpf=");
+		builder.append(cpf);
+		builder.append(", age=");
+		builder.append(age);
+		builder.append(", address=");
+		builder.append(address);
+		builder.append(", sex=");
+		builder.append(sex);
+		builder.append(", weight=");
+		builder.append(weight);
+		builder.append(", height=");
+		builder.append(height);
+		builder.append(", birthDate=");
+		builder.append(birthDate);
+		builder.append(", followers=");
+		builder.append(followers);
+		builder.append("]");
+		return builder.toString();
 	}
 	
 }
