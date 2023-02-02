@@ -1,8 +1,8 @@
 package example;
 
-import java.util.Date;
+import java.time.LocalDate;
 
-public class Person {
+public abstract class Person {
 	
 	private String name = null;
 	private String cpf = "000.000.000-00";
@@ -11,15 +11,15 @@ public class Person {
 	private char sex = 'M';
 	private float weight = 0;
 	private float height = 0;
-	private Date birthDate = null;
+	private LocalDate birthDate = null;
 	private Integer followers = null;
 	
-	public Person() {
+	protected Person() {
 		super();
 	}
 	
-	public Person(String name, String cpf, int age, String address, char sex,
-			float weight, float height, Date birthDate, Integer followers) {
+	protected Person(String name, String cpf, int age, String address, char sex,
+			float weight, float height, LocalDate birthDate, Integer followers) {
 		this.name = name;
 		this.cpf = cpf;
 		this.age = age;
@@ -87,11 +87,11 @@ public class Person {
 		this.height = height;
 	}
 	
-	public Date getBirthDate() {
+	public LocalDate getBirthDate() {
 		return birthDate;
 	}
 	
-	public void setBirthDate(Date birthDate) {
+	public void setBirthDate(LocalDate birthDate) {
 		this.birthDate = birthDate;
 	}
 	

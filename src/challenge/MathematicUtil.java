@@ -1,5 +1,7 @@
 package challenge;
 
+import static java.lang.Math.PI;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
@@ -7,12 +9,10 @@ import java.util.logging.Logger;
 
 public class MathematicUtil {
 	
-	public static final double PI = Math.PI;
-	
 	public static void main(String[] args) {
 		Logger logger = Logger.getLogger("");
 		logger.log(Level.INFO, "{0}", calculateFibonacci(12));
-		logger.log(Level.INFO, "{0}", circleAreaByRadius(12));
+		logger.log(Level.INFO, "{0}", circleAreaByRadius(6));
 		logger.log(Level.INFO, "{0}", circleAreaByDiameter(24));
 	}
 	
@@ -25,7 +25,7 @@ public class MathematicUtil {
 	 * @return
 	 */
 	public static List<Integer> calculateFibonacci(int value) {
-		ArrayList<Integer> result = new ArrayList<>();
+		List<Integer> result = new ArrayList<>();
 		result.add(0, 1);
 		result.add(1, 1);
 		for (int i = 2; i < value; i++) {
@@ -51,6 +51,6 @@ public class MathematicUtil {
 	 * @return
 	 */
 	public static double circleAreaByDiameter(float diameter) {
-		return (PI * Math.pow(diameter, 2)) / 4;
+		return PI * Math.pow(diameter, 2) / 4;
 	}
 }

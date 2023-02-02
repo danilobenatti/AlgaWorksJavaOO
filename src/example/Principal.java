@@ -2,6 +2,8 @@ package example;
 
 import java.text.NumberFormat;
 import java.time.Instant;
+import java.time.LocalDate;
+import java.time.Month;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -14,10 +16,16 @@ import calculate.Salary;
 
 public class Principal {
 	
+	private static final NumberFormat c = NumberFormat.getCurrencyInstance();
+	
+	private static String imc(Person p) {
+		return Imc.imcByGender(p.getWeight(), p.getHeight(), p.getSex());
+	}
+	
 	public static void main(String[] args) {
 		Logger logger = Logger.getLogger("");
 		
-		Person owner1 = new Person();
+		var owner1 = new Driver();
 		owner1.setName("John Wayne");
 		owner1.setCpf("123.456.789-0");
 		owner1.setAge(40);
@@ -25,13 +33,15 @@ public class Principal {
 		owner1.setSex('M');
 		owner1.setWeight(92.8f);
 		owner1.setHeight(1.78f);
-		Instant date1 = Instant.parse("1952-07-25T03:00:00.00Z");
-		owner1.setBirthDate(Date.from(date1));
+		owner1.setBirthDate(LocalDate.of(1952, Month.JULY, 25));
 		owner1.setFollowers(2000);
-		logger.log(Level.INFO, String.format("%s IMC{0}", owner1.getName()), Imc
-				.imc(owner1.getWeight(), owner1.getHeight(), owner1.getSex()));
+		Character[] licensesOwner1 = { 'A', 'B' };
+		owner1.setDrivingLicense(licensesOwner1);
+		owner1.setExpirationDate(LocalDate.of(2023, Month.JANUARY, 28));
+		logger.log(Level.INFO, String.format("%s IMC{0}", owner1.getName()),
+				imc(owner1));
 		
-		Vehicle beetle = new Vehicle();
+		var beetle = new Vehicle();
 		beetle.setType("car");
 		beetle.setManufactor("VW");
 		beetle.setModel("1600S");
@@ -41,8 +51,10 @@ public class Principal {
 		beetle.setVelocity(60);
 		beetle.setActive(true);
 		beetle.setOwner(owner1);
+		logger.log(Level.INFO, "License is valid? {0}",
+				Driver.validateLicense(owner1.getExpirationDate()));
 		
-		Person owner2 = new Person();
+		var owner2 = new Driver();
 		owner2.setName("Axel Rose");
 		owner2.setCpf("098.765.432-1");
 		owner2.setAge(25);
@@ -50,13 +62,15 @@ public class Principal {
 		owner2.setSex('f');
 		owner2.setWeight(58.7f);
 		owner2.setHeight(1.54f);
-		Instant date2 = Instant.parse("1987-09-05T03:00:00.00Z");
-		owner2.setBirthDate(Date.from(date2));
+		owner2.setBirthDate(LocalDate.of(1987, Month.SEPTEMBER, 05));
 		owner2.setFollowers(5000);
-		logger.log(Level.INFO, String.format("%s IMC{0}", owner2.getName()), Imc
-				.imc(owner2.getWeight(), owner2.getHeight(), owner2.getSex()));
+		Character[] licensesOwner2 = { 'A', 'B', 'C' };
+		owner2.setDrivingLicense(licensesOwner2);
+		owner2.setExpirationDate(LocalDate.of(2023, Month.FEBRUARY, 28));
+		logger.log(Level.INFO, String.format("%s IMC{0}", owner2.getName()),
+				imc(owner2));
 		
-		Vehicle pickup = new Vehicle();
+		var pickup = new Vehicle();
 		pickup.setType("utility");
 		pickup.setManufactor("Ford");
 		pickup.setModel("Ranger XL");
@@ -66,6 +80,8 @@ public class Principal {
 		pickup.setVelocity(100);
 		pickup.setActive(true);
 		pickup.setOwner(owner2);
+		logger.log(Level.INFO, "License is valid? {0}",
+				Driver.validateLicense(owner2.getExpirationDate()));
 		
 		List<Vehicle> vehicles = new ArrayList<>();
 		vehicles.add(beetle);
@@ -86,25 +102,25 @@ public class Principal {
 		
 		double[] values = { 1500, 1600, 2000, 2000.1, 500.75, 1100.5, 500.76 };
 		
-		NumberFormat currency = NumberFormat.getCurrencyInstance();
-		logger.log(Level.INFO, "MAX: {0}",
-				currency.format(Salary.max(values).orElse(0.0)));
-		logger.log(Level.INFO, "MIN: {0}",
-				currency.format(Salary.min(values).orElse(0.0)));
-		logger.log(Level.INFO, "SUM: {0}", currency.format(Salary.sum(values)));
-		logger.log(Level.INFO, "AVG: {0}",
-				currency.format(Salary.avg(values).getAsDouble()));
+		String max = c.format(Salary.max(values).orElse(0.0));
+		String min = c.format(Salary.min(values).orElse(0.0));
+		String sum = c.format(Salary.sum(values));
+		String avg = c.format(Salary.avg(values).getAsDouble());
+		
+		logger.log(Level.INFO, "Salary value MAX: {0}", max);
+		logger.log(Level.INFO, "Salary value MIN: {0}", min);
+		logger.log(Level.INFO, "Salary value SUM: {0}", sum);
+		logger.log(Level.INFO, "Salary value AVG: {0}", avg);
 		
 		/**
 		 * owner1.getFollowers() = 2000 / owner2.getFollowers() = 5000
 		 */
-		logger.log(Level.INFO, "Test followers: {0}",
-				owner1.getFollowers().compareTo(owner2.getFollowers())); // -1
-		/**
-		 * owner2.getFollowers() = 5000 / owner1.getFollowers() = 2000
-		 */
-		logger.log(Level.INFO, "Test followers: {0}",
+		logger.log(Level.INFO, "Test1 followers: {0}",
 				owner2.getFollowers().compareTo(owner1.getFollowers())); // 1
+		logger.log(Level.INFO, "Test2 followers: {0}",
+				owner2.getFollowers().compareTo(5000)); // 0
+		logger.log(Level.INFO, "Test3 followers: {0}",
+				owner1.getFollowers().compareTo(owner2.getFollowers())); // -1
 		
 		Integer i1 = 127;
 		Integer i2 = 127;

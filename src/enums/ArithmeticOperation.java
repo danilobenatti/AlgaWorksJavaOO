@@ -3,32 +3,32 @@ package enums;
 public enum ArithmeticOperation {
 	SUM {
 		@Override
-		public double operation(double a, double b) {
+		public float operation(float a, float b) {
 			return a + b;
 		}
 	},
 	SUBTRACTION {
 		@Override
-		public double operation(double a, double b) {
+		public float operation(float a, float b) {
 			return a - b;
 		}
 	},
 	DIVISION {
 		@Override
-		public double operation(double a, double b) {
+		public float operation(float a, float b) {
 			if (b > 0) {
 				return a / b;
 			}
-			return Double.POSITIVE_INFINITY;
+			return Float.POSITIVE_INFINITY;
 		}
 	},
 	MULTIPLY {
 		@Override
-		public double operation(double a, double b) {
+		public float operation(float a, float b) {
 			return a * b;
 		}
 	};
 	
-	public abstract double operation(double a, double b);
+	public abstract float operation(float a, float b);
 	
 }

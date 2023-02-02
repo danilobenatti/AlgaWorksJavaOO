@@ -1,20 +1,20 @@
 package inheritance;
 
-import java.util.Date;
+import java.time.LocalDate;
 
-public class Person {
+public abstract class Person {
 	
 	private String name;
 	private int age;
 	private Genre genre;
-	private Date birthday;
+	private LocalDate birthday;
 	private float weight;
 	private float height;
 	
-	public Person() {
+	protected Person() {
 	}
 	
-	public Person(String name, int age, Genre genre, Date birthday,
+	protected Person(String name, int age, Genre genre, LocalDate birthday,
 			float weight, float height) {
 		this.name = name;
 		this.age = age;
@@ -48,11 +48,11 @@ public class Person {
 		this.genre = genre;
 	}
 	
-	public Date getBirthday() {
+	public LocalDate getBirthday() {
 		return birthday;
 	}
 	
-	public void setBirthday(Date birthday) {
+	public void setBirthday(LocalDate birthday) {
 		this.birthday = birthday;
 	}
 	

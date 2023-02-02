@@ -12,11 +12,10 @@ public class Imc {
 		return value;
 	}
 	
-	public static String imc(float weight, float height, char sex) {
-		double imc = calcImc(weight, height);
+	public static String imcByGender(float weight, float height, char sex) {
 		return switch (sex) {
-			case 'f', 'F' -> femaleImc(imc);
-			case 'm', 'M' -> maleImc(imc);
+			case 'f', 'F' -> femaleImc(calcImc(weight, height));
+			case 'm', 'M' -> maleImc(calcImc(weight, height));
 			default -> null;
 		};
 	}

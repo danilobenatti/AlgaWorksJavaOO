@@ -9,7 +9,7 @@ import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class AgeCalculatorExample {
+public class AgeCalculator {
 	
 	public static void main(String[] args) {
 		Logger logger = Logger.getLogger("");
@@ -23,17 +23,22 @@ public class AgeCalculatorExample {
 		LocalDate date = LocalDate.parse(inputDate);
 		logger.log(Level.INFO, "Calculated age: {0}", calculeAge(date));
 		
-		LocalDate dateOfBirth = LocalDate.of(1988, 8, 24);
+		/**
+		 * LocalDate dateOfBirth = LocalDate.of(1988, 8, 24);
+		 * 
+		 * @author danil
+		 */
+		LocalDate dateOfBirth = LocalDate.of(date.getYear(),
+				date.getMonthValue(), date.getDayOfMonth());
 		LocalDate currentDate = LocalDate.now();
 		
 		Period period = Period.between(dateOfBirth, currentDate);
 		
-		logger.log(Level.INFO, "{0}",
-				String.format("Age is %d years %d months and %d days.",
-						period.getYears(), period.getMonths(),
-						period.getDays()));
+		logger.log(Level.INFO, "{0}", calculeAge(period));
 		logger.log(Level.INFO, "{0}", String.format("Age is %d years.",
 				ChronoUnit.YEARS.between(dateOfBirth, currentDate)));
+		logger.log(Level.INFO, "{0}", String.format("Age is %d days.",
+				ChronoUnit.DAYS.between(dateOfBirth, currentDate)));
 		
 		Calendar dateOfBirth2 = new GregorianCalendar(date.getYear(),
 				date.getMonthValue(), date.getDayOfMonth());
@@ -54,8 +59,21 @@ public class AgeCalculatorExample {
 		
 	}
 	
+	private static String calculeAge(Period period) {
+		return String.format("Age is %d years %d months and %d days.",
+				period.getYears(), period.getMonths(), period.getDays());
+	}
+	
 	public static int calculeAge(LocalDate dateOfBirth) {
 		LocalDate currentDate = LocalDate.now();
 		return Period.between(dateOfBirth, currentDate).getYears();
 	}
+	
+	public static String calculeAgeToString(LocalDate dateOfBirth) {
+		LocalDate currentDate = LocalDate.now();
+		Period period = Period.between(dateOfBirth, currentDate);
+		return String.format("Age is %d years %d months and %d days.",
+				period.getYears(), period.getMonths(), period.getDays());
+	}
+	
 }
