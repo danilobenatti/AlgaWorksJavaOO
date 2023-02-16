@@ -13,14 +13,16 @@ public class AgeCalculator {
 	
 	public static void main(String[] args) {
 		Logger logger = Logger.getLogger("");
+		
+		LocalDate date = LocalDate.now();
 		String inputDate = null;
 		try (Scanner scanner = new Scanner(System.in)) {
 			logger.info("Info date of birth in YYYY-MM-DD format.");
 			if (scanner.hasNext()) {
 				inputDate = scanner.next();
+				date = LocalDate.parse(inputDate.replace('/', '-').trim());
 			}
 		}
-		LocalDate date = LocalDate.parse(inputDate);
 		logger.log(Level.INFO, "Calculated age: {0}", calculeAge(date));
 		
 		/**
@@ -34,10 +36,11 @@ public class AgeCalculator {
 		
 		Period period = Period.between(dateOfBirth, currentDate);
 		
-		logger.log(Level.INFO, "{0}", calculeAge(period));
-		logger.log(Level.INFO, "{0}", String.format("Age is %d years.",
+		logger.log(Level.INFO, "Ex.1: {0}", calculeAge(period));
+		logger.log(Level.INFO, "Ex.2: {0}", calculeAgeToString(dateOfBirth));
+		logger.log(Level.INFO, "Ex.3: {0}", String.format("Age is %d years.",
 				ChronoUnit.YEARS.between(dateOfBirth, currentDate)));
-		logger.log(Level.INFO, "{0}", String.format("Age is %d days.",
+		logger.log(Level.INFO, "Ex.4: {0}", String.format("Age is %d days.",
 				ChronoUnit.DAYS.between(dateOfBirth, currentDate)));
 		
 		Calendar dateOfBirth2 = new GregorianCalendar(date.getYear(),
@@ -65,13 +68,11 @@ public class AgeCalculator {
 	}
 	
 	public static int calculeAge(LocalDate dateOfBirth) {
-		LocalDate currentDate = LocalDate.now();
-		return Period.between(dateOfBirth, currentDate).getYears();
+		return Period.between(dateOfBirth, LocalDate.now()).getYears();
 	}
 	
 	public static String calculeAgeToString(LocalDate dateOfBirth) {
-		LocalDate currentDate = LocalDate.now();
-		Period period = Period.between(dateOfBirth, currentDate);
+		Period period = Period.between(dateOfBirth, LocalDate.now());
 		return String.format("Age is %d years %d months and %d days.",
 				period.getYears(), period.getMonths(), period.getDays());
 	}

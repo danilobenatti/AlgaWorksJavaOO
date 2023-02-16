@@ -27,9 +27,6 @@ public class Principal {
 		calendar.set(Calendar.MONTH, 0); // values: 0(jan) - 11(dez).
 		calendar.set(Calendar.YEAR, 1950);
 		
-		DateFormat dateFormat1 = new SimpleDateFormat("dd/MM/yyyy");
-		DateFormat dateFormat2 = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
-		
 		logger.info(() -> calendar.getTime().toString());
 		calendar.add(Calendar.MONTH, 6);
 		logger.info(() -> calendar.getTime().toString());
@@ -39,6 +36,9 @@ public class Principal {
 		logger.info(() -> calendar.getTime().toString());
 		calendar.roll(Calendar.DAY_OF_MONTH, 30);
 		logger.info(() -> calendar.getTime().toString());
+		
+		DateFormat dateFormat1 = new SimpleDateFormat("dd/MM/y");
+		DateFormat dateFormat2 = new SimpleDateFormat("dd/MM/y HH:mm:ss");
 		
 		logger.info(() -> "Ex.1A:  " + dateFormat1.format(now));
 		logger.info(() -> "Ex.1B:  " + dateFormat2.format(now));
@@ -69,16 +69,21 @@ public class Principal {
 		LocalDate date2 = LocalDate.now();
 		logger.info(date2::toString);
 		
-		String birthday = "1950/01/05";
-		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd");
+		String birthday = "1950-01-05"; // yyyy/MM/dd
+		DateTimeFormatter formatter = DateTimeFormatter.ISO_DATE;
 		LocalDate localdate = LocalDate.parse(birthday, formatter);
 		logger.info(localdate::toString);
 		logger.info(() -> "Ex.6: "
 				+ DateFormat.getDateInstance(DateFormat.FULL).format(date));
-		logger.info(localdate.getDayOfMonth() + "/" + localdate.getMonthValue()
-				+ "/" + localdate.getYear());
+		logger.info("Ex.7: " + localdate.getDayOfMonth() + "/"
+				+ localdate.getMonthValue() + "/" + localdate.getYear());
 		
 		logger.info(() -> AgeCalculator.calculeAgeToString(localdate));
+		
+		logger.info(() -> DateTimeFormatter.ofPattern("d/MMM/y")
+				.format(LocalDate.of(2023, 1, 7)));
+		logger.info(() -> DateTimeFormatter.ofPattern("d/MMMM/y")
+				.format(LocalDate.now()));
 		
 	}
 	
