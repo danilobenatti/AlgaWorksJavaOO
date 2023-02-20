@@ -16,7 +16,8 @@ public class ContaPagar extends Conta {
 	}
 	
 	public void pagar() {
-		logger.info("Conta a pagar: " + getDescricao());
+		logger.info(
+				() -> "Conta a pagar: " + getDescricao() + "\n" + toString());
 	}
 	
 	@Override
@@ -30,6 +31,17 @@ public class ContaPagar extends Conta {
 	
 	public void setFornecedor(Fornecedor fornecedor) {
 		this.fornecedor = fornecedor;
+	}
+	
+	@Override
+	public String toString() {
+		StringBuilder builder = new StringBuilder();
+		builder.append("ContaPagar [fornecedor=");
+		builder.append(fornecedor.getNome());
+		builder.append(", ");
+		builder.append(super.toString());
+		builder.append("]");
+		return builder.toString();
 	}
 	
 }

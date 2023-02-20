@@ -16,7 +16,8 @@ public class ContaReceber extends Conta {
 	}
 	
 	public void receber() {
-		logger.info("Conta a receber: " + getDescricao());
+		logger.info(
+				() -> "Conta a receber: " + getDescricao() + "\n" + toString());
 	}
 	
 	@Override
@@ -30,6 +31,17 @@ public class ContaReceber extends Conta {
 	
 	public void setCliente(Cliente cliente) {
 		this.cliente = cliente;
+	}
+	
+	@Override
+	public String toString() {
+		StringBuilder builder = new StringBuilder();
+		builder.append("ContaReceber [cliente=");
+		builder.append(cliente.getNome());
+		builder.append(", ");
+		builder.append(super.toString());
+		builder.append("]");
+		return builder.toString();
 	}
 	
 }

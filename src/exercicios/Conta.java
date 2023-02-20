@@ -1,6 +1,8 @@
 package exercicios;
 
+import java.text.NumberFormat;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.logging.Logger;
 
 public abstract class Conta {
@@ -47,4 +49,19 @@ public abstract class Conta {
 	public void setDataVencimento(LocalDate dataVencimento) {
 		this.dataVencimento = dataVencimento;
 	}
+	
+	@Override
+	public String toString() {
+		StringBuilder builder = new StringBuilder();
+		builder.append("Conta [descricao=");
+		builder.append(descricao);
+		builder.append(", valor=");
+		builder.append(NumberFormat.getCurrencyInstance().format(valor));
+		builder.append(", dataVencimento=");
+		builder.append(DateTimeFormatter.ofPattern("dd/MM/yyyy")
+				.format(dataVencimento));
+		builder.append("]");
+		return builder.toString();
+	}
+	
 }

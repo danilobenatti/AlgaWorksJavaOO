@@ -1,10 +1,24 @@
 package calculate;
 
+/**
+ * Class for calculating the Body Mass Index (BMI). Based on the individual's
+ * weight, height and gender.
+ * 
+ * @author danil
+ *
+ */
 public class Imc {
 	
 	private Imc() {
 	}
 	
+	/**
+	 * Method that calculates the body mass index (BMI).
+	 * 
+	 * @param weight Person's weight in kilograms.
+	 * @param height Height of the person in meters.
+	 * @return value Double BMI value.
+	 */
 	public static double calcImc(float weight, float height) {
 		double value = 0;
 		if (weight > 0 && height > 0)
@@ -12,6 +26,15 @@ public class Imc {
 		return value;
 	}
 	
+	/**
+	 * Method that calculates the body mass index (BMI) by the individual's
+	 * gender.
+	 * 
+	 * @param weight Person's weight in kilograms.
+	 * @param height Height of the person in meters.
+	 * @param sex    Gender of the person, male or female only.
+	 * @return info BMI calculation information.
+	 */
 	public static String imcByGender(float weight, float height, char sex) {
 		return switch (sex) {
 			case 'f', 'F' -> femaleImc(calcImc(weight, height));
@@ -20,6 +43,12 @@ public class Imc {
 		};
 	}
 	
+	/**
+	 * Method that returns information about the BMI calculation for females.
+	 * 
+	 * @param value Calculated BMI.
+	 * @return info BMI calculation information for women.
+	 */
 	public static String femaleImc(double value) {
 		String info = null;
 		if (value < 19.1) {
@@ -36,6 +65,12 @@ public class Imc {
 		return info;
 	}
 	
+	/**
+	 * Method that returns information about the BMI calculation for males.
+	 * 
+	 * @param value Calculated BMI.
+	 * @return info BMI calculation information for men.
+	 */
 	public static String maleImc(double value) {
 		String info = null;
 		if (value < 20.7) {
