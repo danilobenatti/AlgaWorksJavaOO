@@ -23,6 +23,10 @@ public class MegaSenaGame {
 		
 		int r = (int) (Math.random() * (upper - lower)) + lower;
 		logger.log(Level.INFO, "{0}", r);
+		
+		double num = 5;
+		num *= num + 5;
+		logger.log(Level.INFO, "{0}", num); // 50
 	}
 	
 }

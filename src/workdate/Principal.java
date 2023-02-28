@@ -4,13 +4,12 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.time.Instant;
 import java.time.LocalDate;
+import java.time.Period;
 import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.logging.Logger;
-
-import calculateage.AgeCalculator;
 
 public class Principal {
 	
@@ -78,13 +77,19 @@ public class Principal {
 		logger.info("Ex.7: " + localdate.getDayOfMonth() + "/"
 				+ localdate.getMonthValue() + "/" + localdate.getYear());
 		
-		logger.info(() -> AgeCalculator.calculeAgeToString(localdate));
+		logger.info(() -> calculeAgeToString(localdate));
 		
 		logger.info(() -> DateTimeFormatter.ofPattern("d/MMM/y")
 				.format(LocalDate.of(2023, 1, 7)));
 		logger.info(() -> DateTimeFormatter.ofPattern("d/MMMM/y")
 				.format(LocalDate.now()));
 		
+	}
+	
+	public static String calculeAgeToString(LocalDate dateOfBirth) {
+		Period period = Period.between(dateOfBirth, LocalDate.now());
+		return String.format("Age is %d years %d months and %d days.",
+				period.getYears(), period.getMonths(), period.getDays());
 	}
 	
 }

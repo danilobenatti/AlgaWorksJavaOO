@@ -12,8 +12,41 @@ import java.util.logging.Logger;
 public class AgeCalculator {
 	
 	public static void main(String[] args) {
+		Calculate calc = new Calculate() {
+			
+			@Override
+			public String calculeAgeToString(LocalDate dateOfBirth) {
+				Period period = Period.between(dateOfBirth, LocalDate.now());
+				return String.format("Age is %d years %d months and %d days.",
+						period.getYears(), period.getMonths(),
+						period.getDays());
+			}
+			
+			@Override
+			public int calculeAge(LocalDate dateOfBirth, LocalDate deathDate) {
+				if (deathDate.isAfter(dateOfBirth)) {
+					return Period.between(dateOfBirth, deathDate).getYears();
+				}
+				return 0;
+			}
+			
+			@Override
+			public int calculeAge(LocalDate dateOfBirth) {
+				if (dateOfBirth.isBefore(LocalDate.now())) {
+					return Period.between(dateOfBirth, LocalDate.now())
+							.getYears();
+				}
+				return 0;
+			}
+			
+			@Override
+			public String calculeAge(Period period) {
+				return String.format("Age is %d years %d months and %d days.",
+						period.getYears(), period.getMonths(),
+						period.getDays());
+			}
+		};
 		Logger logger = Logger.getLogger("");
-		
 		LocalDate date = LocalDate.now();
 		String inputDate = null;
 		try (Scanner scanner = new Scanner(System.in)) {
@@ -23,7 +56,8 @@ public class AgeCalculator {
 				date = LocalDate.parse(inputDate.replace('/', '-').trim());
 			}
 		}
-		logger.log(Level.INFO, "Calculated age: {0}", calculeAge(date));
+		logger.log(Level.INFO, "Calculated age: {0}",
+				calc.calculeAge(date));
 		
 		/**
 		 * LocalDate dateOfBirth = LocalDate.of(1988, 8, 24);
@@ -36,8 +70,9 @@ public class AgeCalculator {
 		
 		Period period = Period.between(dateOfBirth, currentDate);
 		
-		logger.log(Level.INFO, "Ex.1: {0}", calculeAge(period));
-		logger.log(Level.INFO, "Ex.2: {0}", calculeAgeToString(dateOfBirth));
+		logger.log(Level.INFO, "Ex.1: {0}", calc.calculeAge(period));
+		logger.log(Level.INFO, "Ex.2: {0}",
+				calc.calculeAgeToString(dateOfBirth));
 		logger.log(Level.INFO, "Ex.3: {0}", String.format("Age is %d years.",
 				ChronoUnit.YEARS.between(dateOfBirth, currentDate)));
 		logger.log(Level.INFO, "Ex.4: {0}", String.format("Age is %d days.",
@@ -60,21 +95,6 @@ public class AgeCalculator {
 		}
 		logger.log(Level.INFO, "Gregorian Calendar: {0}", age);
 		
-	}
-	
-	private static String calculeAge(Period period) {
-		return String.format("Age is %d years %d months and %d days.",
-				period.getYears(), period.getMonths(), period.getDays());
-	}
-	
-	public static int calculeAge(LocalDate dateOfBirth) {
-		return Period.between(dateOfBirth, LocalDate.now()).getYears();
-	}
-	
-	public static String calculeAgeToString(LocalDate dateOfBirth) {
-		Period period = Period.between(dateOfBirth, LocalDate.now());
-		return String.format("Age is %d years %d months and %d days.",
-				period.getYears(), period.getMonths(), period.getDays());
 	}
 	
 }

@@ -1,0 +1,17 @@
+<client id="2">
+  <name>Peter Parker</name>
+  <birthday>1962-08-10</birthday>
+  <gender>M</gender>
+  <isAlive>true</isAlive>
+  <address id="2">
+    <street>10165 McKinley Dr</street>
+    <city>Tampa</city>
+    <estate>Florida</estate>
+  </address>
+  <phones>
+    <phone id="3">
+      <type>W</type>
+      <number>0011112222</number>
+    </phone>
+  </phones>
+</client>

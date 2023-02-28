@@ -1,0 +1,21 @@
+<client id="1">
+  <name>Jimmy Foster</name>
+  <birthday>1951-12-16</birthday>
+  <gender>M</gender>
+  <isAlive>true</isAlive>
+  <address id="1">
+    <street>163 Newark Ave</street>
+    <city>Jersey City</city>
+    <estate>New Jersey</estate>
+  </address>
+  <phones>
+    <phone>
+      <type>H</type>
+      <number>9912123434</number>
+    </phone>
+    <phone>
+      <type>M</type>
+      <number>9988887777</number>
+    </phone>
+  </phones>
+</client>

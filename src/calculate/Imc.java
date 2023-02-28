@@ -13,7 +13,7 @@ public class Imc {
 	}
 	
 	/**
-	 * Method that calculates the body mass index (BMI).
+	 * Method that calculates the <b>body mass index</b> (BMI).
 	 * 
 	 * @param weight Person's weight in kilograms.
 	 * @param height Height of the person in meters.
@@ -27,13 +27,15 @@ public class Imc {
 	}
 	
 	/**
-	 * Method that calculates the body mass index (BMI) by the individual's
-	 * gender.
+	 * Method that calculates the <b>body mass index</b> (BMI) by the
+	 * individual's gender.
 	 * 
 	 * @param weight Person's weight in kilograms.
 	 * @param height Height of the person in meters.
 	 * @param sex    Gender of the person, male or female only.
 	 * @return info BMI calculation information.
+	 * @throws info NullPointException
+	 * @since 1.0
 	 */
 	public static String imcByGender(float weight, float height, char sex) {
 		return switch (sex) {

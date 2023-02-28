@@ -1,0 +1,7 @@
+<client>
+  <name>John Wayne</name>
+  <birthday>1907-05-26</birthday>
+  <deathDate>1979-06-11</deathDate>
+  <gender>M</gender>
+  <isAlive>false</isAlive>
+</client>
