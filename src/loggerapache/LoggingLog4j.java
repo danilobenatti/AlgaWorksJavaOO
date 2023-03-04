@@ -15,7 +15,7 @@ public class LoggingLog4j {
 		
 		logger.debug("Info -> ...");
 		
-		logger.info("Application finalizing.");
+		logger.warn("Application finalizing.");
 		
 	}
 	

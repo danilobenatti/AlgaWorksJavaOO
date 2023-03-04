@@ -16,7 +16,7 @@ public class PropertiesConfigLog4j {
 		
 		logger.debug("Info -> ...");
 		
-		logger.info("Application finalizing.");
+		logger.warn("Application finalizing.");
 		
 	}
 	
