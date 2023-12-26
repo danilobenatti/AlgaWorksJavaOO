@@ -22,14 +22,14 @@ public class Testnumbers {
 		logger.log(Level.INFO, "Ex.2: {0}", numberFormat.format(value));
 		
 		logger.log(Level.INFO, "Ex.3: {0}", NumberFormat
-				.getCurrencyInstance(new Locale("en", "US")).format(value));
+				.getCurrencyInstance(Locale.of("en", "US")).format(value));
 		
 		String money = "R$ 1.300,59";
 		try {
 			double price = decimalFormat.parse(money).doubleValue();
 			logger.log(Level.INFO, "Ex.4: {0}", price);
 			logger.log(Level.INFO, "Ex.5: {0}", NumberFormat
-					.getCurrencyInstance(new Locale("fr", "FR")).format(price));
+					.getCurrencyInstance(Locale.of("fr", "FR")).format(price));
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}

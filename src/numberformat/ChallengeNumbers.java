@@ -11,7 +11,7 @@ public class ChallengeNumbers {
 	
 	public static void main(String[] args) {
 		Logger logger = Logger.getLogger("");
-		Locale locale = new Locale("pt", "BR");
+		Locale locale = Locale.of("pt", "BR");
 		
 		var input = 0.0d; // double
 		var tax = 0.0d; // double
