@@ -9,12 +9,19 @@ import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
-import java.util.logging.Logger;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.core.config.Configurator;
 
 public class Principal {
 	
+	static Logger logger = LogManager.getLogger();
+	
 	public static void main(String[] args) {
-		Logger logger = Logger.getLogger("");
+		
+		Configurator.initialize(Principal.class.getName(),
+				"./src/config/log4j2.properties");
 		
 		Date now = new Date();
 		logger.info(now::toString);
@@ -72,10 +79,11 @@ public class Principal {
 		DateTimeFormatter formatter = DateTimeFormatter.ISO_DATE;
 		LocalDate localdate = LocalDate.parse(birthday, formatter);
 		logger.info(localdate::toString);
-		logger.info(() -> "Ex.6: "
-				+ DateFormat.getDateInstance(DateFormat.FULL).format(date));
-		logger.info("Ex.7: " + localdate.getDayOfMonth() + "/"
-				+ localdate.getMonthValue() + "/" + localdate.getYear());
+		logger.info(() -> "Ex.6: ".concat(
+				DateFormat.getDateInstance(DateFormat.FULL).format(date)));
+		logger.info(() -> "Ex.7: "
+				.concat(String.format("%s/%s/%s", localdate.getDayOfMonth(),
+						localdate.getMonthValue(), localdate.getYear())));
 		
 		logger.info(() -> calculeAgeToString(localdate));
 		
